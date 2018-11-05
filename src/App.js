@@ -1,28 +1,38 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Signin from './signin';
+import Counter from './counter';
+import useSigninStatus from './status';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+function App(props) {
+  // destructure the 2 elements off useState passed an initial value of 0
+  const [value, Setvalue] = useState(0);
+
+  // default app to being signed-out with hook
+  let status = useSigninStatus(false);
+  console.log(status);
+
+  function Incvalue() {
+    return Setvalue(value + 1);
   }
+
+  function Decvalue() {
+    return Setvalue(value - 1);
+  }
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <Signin {...status} />
+        <Counter
+          isSignin={status.isSignin}
+          value={value}
+          Increment={Incvalue}
+          Decrement={Decvalue}
+        />
+      </header>
+    </div>
+  );
 }
 
 export default App;
