@@ -1,12 +1,12 @@
 import React from 'react';
 
-export default props => {
-  if (props.isSignin) {
+export default ({ isSignin, value, Increment, Decrement }) => {
+  if (isSignin) {
     return (
       <div>
-        <h1>{props.value}</h1>
-        <button onClick={props.Increment}>Increment</button>
-        <button onClick={props.Decrement}>Decrement</button>
+        <h1>{value}</h1>
+        <button onClick={Increment}>Increment</button>
+        <button onClick={Decrement}>Decrement</button>
       </div>
     );
   }
